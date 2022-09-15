@@ -10,6 +10,7 @@
 		04AAAD3828D32AC900C57D89 /* ZZSegmentor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAAD2F28D32AC800C57D89 /* ZZSegmentor.framework */; };
 		04AAAD3D28D32AC900C57D89 /* ZZSegmentorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAAD3C28D32AC900C57D89 /* ZZSegmentorTests.swift */; };
 		04AAAD3E28D32AC900C57D89 /* ZZSegmentor.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AAAD3228D32AC800C57D89 /* ZZSegmentor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		04AAAD4828D32AD400C57D89 /* ZZSegmentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAAD4728D32AD400C57D89 /* ZZSegmentor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -27,6 +28,7 @@
 		04AAAD3228D32AC800C57D89 /* ZZSegmentor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZSegmentor.h; sourceTree = "<group>"; };
 		04AAAD3728D32AC900C57D89 /* ZZSegmentorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZZSegmentorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AAAD3C28D32AC900C57D89 /* ZZSegmentorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSegmentorTests.swift; sourceTree = "<group>"; };
+		04AAAD4728D32AD400C57D89 /* ZZSegmentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSegmentor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				04AAAD3228D32AC800C57D89 /* ZZSegmentor.h */,
+				04AAAD4728D32AD400C57D89 /* ZZSegmentor.swift */,
 			);
 			path = ZZSegmentor;
 			sourceTree = "<group>";
@@ -144,6 +147,7 @@
 				TargetAttributes = {
 					04AAAD2E28D32AC800C57D89 = {
 						CreatedOnToolsVersion = 14.0;
+						LastSwiftMigration = 1400;
 					};
 					04AAAD3628D32AC900C57D89 = {
 						CreatedOnToolsVersion = 14.0;
@@ -191,6 +195,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04AAAD4828D32AD400C57D89 /* ZZSegmentor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +340,7 @@
 		04AAAD4228D32AC900C57D89 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -355,6 +361,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -362,6 +369,7 @@
 		04AAAD4328D32AC900C57D89 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -389,6 +397,7 @@
 		04AAAD4528D32AC900C57D89 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -403,6 +412,7 @@
 		04AAAD4628D32AC900C57D89 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
