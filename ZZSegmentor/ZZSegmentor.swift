@@ -18,4 +18,5 @@ public protocol Timeframe {
     var end: Date { get }
     var items: [DateItem] { get }
     init(start: Date, end: Date)
+    func update(start: Date, end: Date)
 }
