@@ -12,3 +12,10 @@ public protocol DateItem {
     var end: Date { get }
     var duration: TimeInterval { get }
 }
+
+public protocol Timeframe {
+    var start: Date { get }
+    var end: Date { get }
+    var items: [DateItem] { get }
+    init(start: Date, end: Date)
+}
