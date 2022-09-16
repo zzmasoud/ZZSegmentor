@@ -21,3 +21,19 @@ public protocol Timeframe {
     init(start: Date, end: Date)
     func update(start: Date, end: Date)
 }
+
+final class ZZSItem: ZZSegmentor.DateItem {
+    var start: Date
+    
+    var end: Date
+    
+    var duration: TimeInterval {
+        return end.timeIntervalSince(start)
+    }
+    
+    required init?(start: Date, end: Date) {
+        guard start < end else { return nil }
+        self.start = start
+        self.end = end
+    }
+}
