@@ -26,5 +26,10 @@ class ZZSItem: ZZSegmentor.DateItem {
 
 final class ZZSItemTests: XCTestCase {
     
+    func test_init_returnsNilOnWrongDates() {
+        let sut = ZZSItem(start: Date(), end: Date().addingTimeInterval(-1))
+        
+        XCTAssertNil(sut)
+    }
     
 }
