@@ -32,4 +32,13 @@ final class ZZSItemTests: XCTestCase {
         XCTAssertNil(sut)
     }
     
+    func test_duration_returnsTimeIntervalBetweenStartAndEnd() {
+        guard let sut = ZZSItem(start: Date(), end: Date().addingTimeInterval(12345)) else { return }
+        let diff: TimeInterval = sut.end.timeIntervalSince1970 - sut.start.timeIntervalSince1970
+        
+        let duration = sut.duration
+        
+        XCTAssertEqual(duration, diff)
+    }
+    
 }
