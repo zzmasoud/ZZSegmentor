@@ -14,7 +14,7 @@ class ZZSTimeframe: Timeframe {
     private(set) var items: [ZZSegmentor.DateItem]
 
     required init(items: [DateItem], start: Date, end: Date) {
-        self.items = items
+        self.items = items.sorted(by: {$0.start < $1.start})
         self.start = start
         self.end = end
     }
@@ -28,11 +28,17 @@ class ZZSTimeframe: Timeframe {
 final class ZZSTimeframeTests: XCTestCase {
 
     func test_init_sortItemsAscending() {
+        let sut = makeSUT()
+        
+        let first = sut.items.first!
+        let last = sut.items.last!
+        
+        XCTAssert(first.start < last.start)
     }
     
     // - MARK: Helpers
     
-    private func makeSUT(_ numberOfItems: Int, start: Date, end: Date) -> ZZSTimeframe {
+    private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> ZZSTimeframe {
         var items: [DateItem] = []
         var startDate = start.addingTimeInterval(-2.days)
         for _ in 0..<numberOfItems {
@@ -45,7 +51,7 @@ final class ZZSTimeframeTests: XCTestCase {
             startDate = finish.addingTimeInterval(Int.random(in: 1...3).hours + Int.random(in: 30...55).minutes)
         }
         
-        return ZZSTimeframe(items: items, start: start, end: end)
+        return ZZSTimeframe(items: items.shuffled(), start: start, end: end)
     }
 }
 
