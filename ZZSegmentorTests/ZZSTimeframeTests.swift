@@ -1,14 +1,14 @@
 //
-//  ZZSegmentorTests.swift
+//  ZZSTimeframeTests.swift
 //  ZZSegmentorTests
 //
 //  Created by Masoud Sheikh Hosseini on 9/15/22.
 //
 
 import XCTest
-@testable import ZZSegmentor
+import ZZSegmentor
 
-final class ZZSegmentorTests: XCTestCase {
+final class ZZSTimeframeTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

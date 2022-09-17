@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04AAAD3828D32AC900C57D89 /* ZZSegmentor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAAD2F28D32AC800C57D89 /* ZZSegmentor.framework */; };
-		04AAAD3D28D32AC900C57D89 /* ZZSegmentorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAAD3C28D32AC900C57D89 /* ZZSegmentorTests.swift */; };
+		04AAAD3D28D32AC900C57D89 /* ZZSTimeframeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAAD3C28D32AC900C57D89 /* ZZSTimeframeTests.swift */; };
 		04AAAD3E28D32AC900C57D89 /* ZZSegmentor.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AAAD3228D32AC800C57D89 /* ZZSegmentor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04AAAD4828D32AD400C57D89 /* ZZSegmentor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAAD4728D32AD400C57D89 /* ZZSegmentor.swift */; };
 		04CA8CF328D44EE2008BA7A5 /* ZZSItemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04CA8CF228D44EE2008BA7A5 /* ZZSItemTests.swift */; };
@@ -28,7 +28,7 @@
 		04AAAD2F28D32AC800C57D89 /* ZZSegmentor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZZSegmentor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AAAD3228D32AC800C57D89 /* ZZSegmentor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZSegmentor.h; sourceTree = "<group>"; };
 		04AAAD3728D32AC900C57D89 /* ZZSegmentorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZZSegmentorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		04AAAD3C28D32AC900C57D89 /* ZZSegmentorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSegmentorTests.swift; sourceTree = "<group>"; };
+		04AAAD3C28D32AC900C57D89 /* ZZSTimeframeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSTimeframeTests.swift; sourceTree = "<group>"; };
 		04AAAD4728D32AD400C57D89 /* ZZSegmentor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSegmentor.swift; sourceTree = "<group>"; };
 		04CA8CF228D44EE2008BA7A5 /* ZZSItemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSItemTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,7 +82,7 @@
 		04AAAD3B28D32AC900C57D89 /* ZZSegmentorTests */ = {
 			isa = PBXGroup;
 			children = (
-				04AAAD3C28D32AC900C57D89 /* ZZSegmentorTests.swift */,
+				04AAAD3C28D32AC900C57D89 /* ZZSTimeframeTests.swift */,
 				04CA8CF228D44EE2008BA7A5 /* ZZSItemTests.swift */,
 			);
 			path = ZZSegmentorTests;
@@ -207,7 +207,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04CA8CF328D44EE2008BA7A5 /* ZZSItemTests.swift in Sources */,
-				04AAAD3D28D32AC900C57D89 /* ZZSegmentorTests.swift in Sources */,
+				04AAAD3D28D32AC900C57D89 /* ZZSTimeframeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
