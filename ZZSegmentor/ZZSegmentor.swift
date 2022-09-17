@@ -18,7 +18,7 @@ public protocol Timeframe {
     var start: Date { get }
     var end: Date { get }
     var items: [DateItem] { get }
-    init(start: Date, end: Date)
+    init(items: [DateItem], start: Date, end: Date)
     func update(start: Date, end: Date)
 }
 
