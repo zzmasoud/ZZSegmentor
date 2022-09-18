@@ -22,6 +22,7 @@ public protocol Timeframe {
     func update(start: Date, end: Date)
 }
 
+
 final public class ZZSItem: ZZSegmentor.DateItem {
     public private(set) var start: Date
     
@@ -37,3 +38,10 @@ final public class ZZSItem: ZZSegmentor.DateItem {
         self.end = end
     }
 }
+
+extension ZZSItem: CustomStringConvertible {
+    public var description: String {
+        return "\(start) .... \(end)"
+    }
+}
+
