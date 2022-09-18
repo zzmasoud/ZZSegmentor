@@ -20,7 +20,22 @@ class ZZSTimeframe: Timeframe {
     }
     
     func update(start: Date, end: Date) {
+        self.start = start
+        self.end = end
         
+        var head = 0
+        var tail = items.count-1
+            
+        while(items[head].start < start && head < tail) {
+            head += 1
+        }
+        
+        while(items[tail].end > end && tail > 0) {
+            tail -= 1
+        }
+        
+        let newItems = Array(items[head...tail])
+        self.items = newItems
     }
 
 }
@@ -34,6 +49,20 @@ final class ZZSTimeframeTests: XCTestCase {
         let last = sut.items.last!
         
         XCTAssert(first.start < last.start)
+    }
+    
+    func test_update_deliverInBoundsItems() {
+        let sut = makeSUT()
+        let count = sut.items.count
+        let lowerIndex = Int.random(in: 0 ..< count/2)
+        let upperIndex = Int.random(in: count/2 ..< count-1)
+        
+        let newStart = sut.items[lowerIndex].start
+        let newEnd = sut.items[upperIndex].end
+        sut.update(start: newStart, end: newEnd)
+        
+        XCTAssert(sut.items.first!.start >= newStart)
+        XCTAssert(sut.items.last!.end <= newEnd)
     }
     
     // - MARK: Helpers
