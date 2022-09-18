@@ -42,8 +42,8 @@ final class ZZSTimeframeTests: XCTestCase {
         var items: [DateItem] = []
         var startDate = start.addingTimeInterval(-2.days)
         for _ in 0..<numberOfItems {
-            let begin = startDate.addingTimeInterval(Int.random(in: 1...4).hours + Int.random(in: 0...55).minutes)
-            let finish = begin.addingTimeInterval(Int.random(in: 0...4).hours) + Int.random(in: 0...55).minutes
+            let begin = startDate.addingTimeInterval(Int.random(in: 1...4).hours + Int.random(in: 10...55).minutes)
+            let finish = begin.addingTimeInterval(Int.random(in: 0...4).hours) + Int.random(in: 10...55).minutes
             
             guard let item = ZZSItem(start: begin, end: finish) else { fatalError() }
             items.append(item)
