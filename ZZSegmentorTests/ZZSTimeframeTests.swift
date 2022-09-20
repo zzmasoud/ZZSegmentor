@@ -34,6 +34,8 @@ class ZZSTimeframe: Timeframe {
             tail -= 1
         }
         
+        guard head != tail else { return items = [] }
+        
         let newItems = Array(items[head...tail])
         self.items = newItems
     }
@@ -63,6 +65,16 @@ final class ZZSTimeframeTests: XCTestCase {
         
         XCTAssert(sut.items.first!.start >= newStart)
         XCTAssert(sut.items.last!.end <= newEnd)
+    }
+    
+    func test_update_deliverNoItemsWhenBeforeBounds() {
+        let sut = makeSUT()
+        
+        let newStart = sut.items.last!.end.addingTimeInterval(1)
+        let newEnd = newStart.addingTimeInterval(1.hours)
+        sut.update(start: newStart, end: newEnd)
+        
+        XCTAssert(sut.items.isEmpty)
     }
     
     // - MARK: Helpers
