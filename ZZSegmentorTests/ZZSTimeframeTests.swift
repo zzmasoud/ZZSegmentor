@@ -77,6 +77,16 @@ final class ZZSTimeframeTests: XCTestCase {
         XCTAssert(sut.items.isEmpty)
     }
     
+    func test_update_deliverNoItemsWhenAfterBounds() {
+        let sut = makeSUT()
+        
+        let newStart = sut.items.first!.start.addingTimeInterval(-1)
+        let newEnd = newStart.addingTimeInterval(-1.hours)
+        sut.update(start: newStart, end: newEnd)
+        
+        XCTAssert(sut.items.isEmpty)
+    }
+    
     // - MARK: Helpers
     
     private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> ZZSTimeframe {
