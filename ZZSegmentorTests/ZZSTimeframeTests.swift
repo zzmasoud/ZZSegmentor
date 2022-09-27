@@ -34,7 +34,14 @@ class ZZSTimeframe: Timeframe {
             tail -= 1
         }
         
-        guard head != tail else { return items = [] }
+        guard head != tail else {
+            let item = items[head]
+            guard let partailItem = ZZSItem(
+                start: min(item.start, start),
+                end: min(item.end, end)
+            ) else { return self.items = [] }
+            return self.items = [item]
+        }
         
         let newItems = Array(items[head...tail])
         self.items = newItems
@@ -85,6 +92,16 @@ final class ZZSTimeframeTests: XCTestCase {
         sut.update(start: newStart, end: newEnd)
         
         XCTAssert(sut.items.isEmpty)
+    }
+    
+    func test_update_deliverPartialItemOnHeadEdge() {
+        let sut = makeSUT()
+        
+        let newStart = sut.items.first!.start.addingTimeInterval(-10)
+        let newEnd = newStart.addingTimeInterval(10)
+        sut.update(start: newStart, end: newEnd)
+
+        XCTAssert(sut.items.count == 1)
     }
     
     // - MARK: Helpers
