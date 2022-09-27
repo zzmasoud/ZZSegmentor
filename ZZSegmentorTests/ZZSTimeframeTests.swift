@@ -102,6 +102,8 @@ final class ZZSTimeframeTests: XCTestCase {
         sut.update(start: newStart, end: newEnd)
 
         XCTAssert(sut.items.count == 1)
+        XCTAssert(sut.items[0].start >= newStart)
+        XCTAssert(sut.items[0].end <= newEnd)
     }
     
     // - MARK: Helpers
