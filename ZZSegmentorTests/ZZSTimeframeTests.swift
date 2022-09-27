@@ -40,7 +40,7 @@ class ZZSTimeframe: Timeframe {
                 start: min(item.start, start),
                 end: min(item.end, end)
             ) else { return self.items = [] }
-            return self.items = [item]
+            return self.items = [partailItem]
         }
         
         let newItems = Array(items[head...tail])
