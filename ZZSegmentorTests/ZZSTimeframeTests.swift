@@ -36,6 +36,9 @@ class ZZSTimeframe: Timeframe {
         
         guard head != tail else {
             let item = items[head]
+            guard DateInterval(start: start, end: end).intersects(DateInterval(start: item.start, end: item.end)) else {
+                return self.items = []
+            }
             guard let partailItem = ZZSItem(
                 start: min(item.start, start),
                 end: min(item.end, end)
@@ -87,14 +90,26 @@ final class ZZSTimeframeTests: XCTestCase {
     func test_update_deliverNoItemsWhenAfterBounds() {
         let sut = makeSUT()
         
-        let newStart = sut.items.first!.start.addingTimeInterval(-1)
-        let newEnd = newStart.addingTimeInterval(-1.hours)
+        let newEnd = sut.items.first!.start.addingTimeInterval(-1)
+        let newStart = newEnd.addingTimeInterval(-1.hours)
         sut.update(start: newStart, end: newEnd)
         
         XCTAssert(sut.items.isEmpty)
     }
     
     func test_update_deliverPartialItemOnHeadEdge() {
+        let sut = makeSUT()
+        
+        let newStart = sut.items.first!.start.addingTimeInterval(-10)
+        let newEnd = newStart.addingTimeInterval(10)
+        sut.update(start: newStart, end: newEnd)
+
+        XCTAssert(sut.items.count == 1)
+        XCTAssert(sut.items[0].start >= newStart)
+        XCTAssert(sut.items[0].end <= newEnd)
+    }
+    
+    func test_update_deliverPartialItemOnTailEdge() {
         let sut = makeSUT()
         
         let newStart = sut.items.first!.start.addingTimeInterval(-10)
