@@ -107,9 +107,9 @@ final class ZZSTimeframeTests: XCTestCase {
     
     func test_update_deliverPartialItemOnHeadEdge() {
         let sut = makeSUT()
+        let newStart = sut.items.first!.start.addingTimeInterval(-1.hours)
+        let newEnd = sut.items.first!.start.addingTimeInterval(10)
         
-        let newStart = sut.items.first!.start.addingTimeInterval(-10)
-        let newEnd = newStart.addingTimeInterval(10)
         sut.update(start: newStart, end: newEnd)
 
         XCTAssert(sut.items.count == 1)
