@@ -20,44 +20,55 @@ class ZZSTimeframe: Timeframe {
     }
     
     func update(start: Date, end: Date) {
-        self.start = start
-        self.end = end
+        var newItems: [ZZSegmentor.DateItem] = []
+        var startIndex = 0
+        var endIndex = items.count - 1
+        var lastItem: ZZSegmentor.DateItem?
         
-        var head = 0
-        var tail = items.count-1
-            
-        while(items[head].start < start && head < tail) {
-            head += 1
+        while(items[startIndex].end < start && startIndex < endIndex) {
+            startIndex += 1
         }
         
-        while(items[tail].end > end && tail > 0) {
-            tail -= 1
+        while(items[endIndex].start > end && endIndex > 0) {
+            endIndex -= 1
         }
         
-        guard head != tail else {
-            let item = items[head]
-            guard DateInterval(start: start, end: end).intersects(DateInterval(start: item.start, end: item.end)) else {
-                return self.items = []
-            }
-            guard let partailItem = ZZSItem(
-                start:
-                    (
-                        head == items.count - 1 ?
-                        max(item.start, start) : min(item.start, start)
-                    ),
-                end: (
-                    head == items.count - 1 ?
-                    max(item.end, end) : min(item.end, end)
-                )
-                    
-            ) else { return self.items = [] }
-            return self.items = [partailItem]
+        if let index = findEdge(forDate: start),
+           let item = ZZSItem(start: start, end: items[index].end) {
+            newItems.append(item)
+            let nextItemIndex = index + 1
+            startIndex = nextItemIndex
         }
         
-        let newItems = Array(items[head...tail])
+        // this means it only overlaps last item
+        if endIndex > items.count-1 { return self.items = newItems }
+        
+        if let index = findEdge(forDate: end) {
+            lastItem = ZZSItem(start: items[index].start, end: end)
+            let prevItemIndex = index - 1
+            endIndex = prevItemIndex
+        }
+        
+        // this means it only overlaps first item
+        if let lastItem = lastItem, startIndex < 0  { return self.items = [lastItem] }
+
+        
+        if endIndex > startIndex {
+            newItems.append(contentsOf: items[startIndex...endIndex])
+        }
+        
+        if let last = lastItem {
+            newItems.append(last)
+        }
+        
         self.items = newItems
     }
-
+    
+    private func findEdge(forDate date: Date) -> Int? {
+        return items.firstIndex(where: {
+            return date > $0.start && date < $0.end
+        })
+    }
 }
 
 final class ZZSTimeframeTests: XCTestCase {
@@ -127,6 +138,22 @@ final class ZZSTimeframeTests: XCTestCase {
         XCTAssert(sut.items.count == 1)
         XCTAssert(sut.items[0].start >= newStart)
         XCTAssert(sut.items[0].end <= newEnd)
+    }
+    
+    func test_update_doesNotExtendPartialItemOnHeadEdge() {
+        let sut = makeSUT()
+        let newStart = sut.items.first!.start.addingTimeInterval(-1.hours)
+        let newEnd = sut.items.first!.start.addingTimeInterval(10)
+        let itemBeforeChange = sut.items.first!
+        
+        sut.update(start: newStart, end: newEnd)
+        let itemAfterChange = sut.items.first!
+
+        XCTAssert(sut.items.count == 1)
+        XCTAssert(sut.items[0].start >= newStart)
+        XCTAssert(sut.items[0].end <= newEnd)
+        XCTAssert(itemAfterChange.duration < itemBeforeChange.duration)
+        XCTAssert(itemAfterChange.start == itemBeforeChange.start)
     }
     
     // - MARK: Helpers
