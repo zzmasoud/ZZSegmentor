@@ -160,16 +160,16 @@ final class ZZSTimeframeTests: XCTestCase {
         let sut = makeSUT()
         let newStart = sut.items.last!.end.addingTimeInterval(-10)
         let newEnd = newStart.addingTimeInterval(1.hours)
-        let itemBeforeChange = sut.items.first!
+        let itemBeforeChange = sut.items.last!
         
         sut.update(start: newStart, end: newEnd)
-        let itemAfterChange = sut.items.first!
+        let itemAfterChange = sut.items.last!
 
         XCTAssert(sut.items.count == 1)
         XCTAssert(sut.items[0].start >= newStart)
         XCTAssert(sut.items[0].end <= newEnd)
         XCTAssert(itemAfterChange.duration < itemBeforeChange.duration)
-        XCTAssert(itemAfterChange.start == itemBeforeChange.start)
+        XCTAssert(itemAfterChange.end == itemBeforeChange.end)
     }
     
     // - MARK: Helpers
