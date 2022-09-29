@@ -178,12 +178,14 @@ final class ZZSTimeframeTests: XCTestCase {
         let lowerIndex = Int.random(in: 0 ..< count/2)
         let upperIndex = Int.random(in: count/2 ..< count-1)
         let totalHours = sut.items.map(\.duration).reduce(0, +)
+        let totalCount = sut.items.count
         
         let newStart = sut.items[lowerIndex].start.addingTimeInterval(10)
         let newEnd = sut.items[upperIndex].end.addingTimeInterval(-10)
         sut.update(start: newStart, end: newEnd)
         let newItems = sut.items
         let afterUpdateTotalHours = sut.items.map(\.duration).reduce(0, +)
+        let afterUpdateTotalCount = sut.items.count
         
         XCTAssert(newItems.first!.start >= newStart)
         XCTAssert(newItems.last!.end <= newEnd)
@@ -191,6 +193,8 @@ final class ZZSTimeframeTests: XCTestCase {
         XCTAssert(newItems.first!.start <= newItems.last!.start)
         // to check it's excatly smaller 20 seconds
         XCTAssert(totalHours > afterUpdateTotalHours)
+        // to check it's not bigger than before
+        XCTAssert(afterUpdateTotalCount <= totalCount)
     }
     
     // - MARK: Helpers
