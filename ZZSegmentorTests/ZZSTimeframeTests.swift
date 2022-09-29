@@ -172,6 +172,27 @@ final class ZZSTimeframeTests: XCTestCase {
         XCTAssert(itemAfterChange.end == itemBeforeChange.end)
     }
     
+    func test_update_deliverInBoundsAndPartialAndSortedItems() {
+        let sut = makeSUT()
+        let count = sut.items.count
+        let lowerIndex = Int.random(in: 0 ..< count/2)
+        let upperIndex = Int.random(in: count/2 ..< count-1)
+        let totalHours = sut.items.map(\.duration).reduce(0, +)
+        
+        let newStart = sut.items[lowerIndex].start.addingTimeInterval(10)
+        let newEnd = sut.items[upperIndex].end.addingTimeInterval(-10)
+        sut.update(start: newStart, end: newEnd)
+        let newItems = sut.items
+        let afterUpdateTotalHours = sut.items.map(\.duration).reduce(0, +)
+        
+        XCTAssert(newItems.first!.start >= newStart)
+        XCTAssert(newItems.last!.end <= newEnd)
+        // to check it's sorted
+        XCTAssert(newItems.first!.start <= newItems.last!.start)
+        // to check it's excatly smaller 20 seconds
+        XCTAssert(totalHours > afterUpdateTotalHours)
+    }
+    
     // - MARK: Helpers
     
     private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> ZZSTimeframe {
