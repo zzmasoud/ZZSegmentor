@@ -156,6 +156,22 @@ final class ZZSTimeframeTests: XCTestCase {
         XCTAssert(itemAfterChange.start == itemBeforeChange.start)
     }
     
+    func test_update_doesNotExtendPartialItemOnTailEdge() {
+        let sut = makeSUT()
+        let newStart = sut.items.last!.end.addingTimeInterval(-10)
+        let newEnd = newStart.addingTimeInterval(1.hours)
+        let itemBeforeChange = sut.items.first!
+        
+        sut.update(start: newStart, end: newEnd)
+        let itemAfterChange = sut.items.first!
+
+        XCTAssert(sut.items.count == 1)
+        XCTAssert(sut.items[0].start >= newStart)
+        XCTAssert(sut.items[0].end <= newEnd)
+        XCTAssert(itemAfterChange.duration < itemBeforeChange.duration)
+        XCTAssert(itemAfterChange.start == itemBeforeChange.start)
+    }
+    
     // - MARK: Helpers
     
     private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> ZZSTimeframe {
