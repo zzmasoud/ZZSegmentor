@@ -19,4 +19,16 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssert(sut.start == start)
         XCTAssert(sut.end == end)
     }
+    
+    func test_initByTimeFrame_deliversStartAndEndDates() {
+        let start = Date().addingTimeInterval(-1)
+        let end = Date().addingTimeInterval(1)
+        let timeframe = ZZSTimeframe(items: [], start: start, end: end)
+        
+        let sut = ZZSegmentor(timeframe: timeframe)
+        
+        XCTAssert(sut.start == start)
+        XCTAssert(sut.end == end)
+
+    }
 }
