@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+class ZZSegmentor {
+    private var timeframe: Timeframe
+    
+    init(timeframe: Timeframe) {
+        self.timeframe = timeframe
+    }
+}
