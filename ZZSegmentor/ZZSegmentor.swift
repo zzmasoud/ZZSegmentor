@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ZZSegmentor {
+public class ZZSegmentor {
     private var timeframe: Timeframe
     private var items: [DateItem]
     
@@ -23,4 +23,9 @@ class ZZSegmentor {
     public convenience init(start: Date, end: Date) {
         self.init(items: [], start: start, end: end)
     }
+}
+
+extension ZZSegmentor {
+    public var start: Date { timeframe.start }
+    public var end: Date { timeframe.end }
 }
