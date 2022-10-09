@@ -191,9 +191,9 @@ final class ZZSTimeframeTests: XCTestCase {
         XCTAssert(newItems.last!.end <= newEnd)
         // to check it's sorted
         XCTAssert(newItems.first!.start <= newItems.last!.start)
-        // to check it's excatly smaller 20 seconds
+        // to check it's smaller than before
         XCTAssert(totalHours > afterUpdateTotalHours)
-        // to check it's not bigger than before
+        // to check it's not more than before
         XCTAssert(afterUpdateTotalCount <= totalCount)
     }
     
