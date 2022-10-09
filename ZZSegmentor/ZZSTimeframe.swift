@@ -18,7 +18,7 @@ public protocol Timeframe {
 final public class ZZSTimeframe: Timeframe {
     public private(set) var start: Date
     public private(set) var end: Date
-    public private(set) var items: [ZZSegmentor.DateItem]
+    public private(set) var items: [DateItem]
 
     required public init(items: [DateItem], start: Date, end: Date) {
         self.items = items.sorted(by: {$0.start < $1.start})
@@ -27,10 +27,10 @@ final public class ZZSTimeframe: Timeframe {
     }
     
     public func update(start: Date, end: Date) {
-        var newItems: [ZZSegmentor.DateItem] = []
+        var newItems: [DateItem] = []
         var startIndex = 0
         var endIndex = items.count - 1
-        var lastItem: ZZSegmentor.DateItem?
+        var lastItem: DateItem?
         
         while(items[startIndex].end < start && startIndex < endIndex) {
             startIndex += 1

@@ -15,7 +15,7 @@ public protocol DateItem {
 }
 
 
-final public class ZZSItem: ZZSegmentor.DateItem {
+final public class ZZSItem: DateItem {
     public private(set) var start: Date
     
     public private(set) var end: Date
