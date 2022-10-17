@@ -31,11 +31,19 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssert(sut.end == end)
     }
     
+    func test_totalTime_deliversSumOfDurationsInTheTimeframe() {
+        let (sut, timeframe) = makeSUT()
+        
+        let sum = timeframe.items.map(\.duration).reduce(0, +)
+        
+        XCTAssert(sut.totalTime == sum)
+    }
+    
     // - MARK: Helpers
     
-    private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> ZZSegmentor {
+    private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> (ZZSegmentor, Timeframe) {
         let timeframe = makeTimeframe(numberOfItems, start: start, end: end)
-        return ZZSegmentor(timeframe: timeframe)
+        return (ZZSegmentor(timeframe: timeframe), timeframe)
     }
     
     private func makeTimeframe(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> ZZSTimeframe {
