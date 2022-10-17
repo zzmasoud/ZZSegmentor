@@ -39,6 +39,20 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssert(sut.totalTime == sum)
     }
     
+    func test_averageTime_deliversZeroForNoItems() {
+        let (sut, timeframe) = makeSUT(0)
+        let sum = timeframe.items.map(\.duration).reduce(0, +)
+            
+        XCTAssert(sut.averageTime == 0)
+    }
+    
+    func test_averageTime_deliversAverageDurationsInTheTimeframe() {
+        let (sut, timeframe) = makeSUT()
+        let sum = timeframe.items.map(\.duration).reduce(0, +)
+                        
+        XCTAssert(sut.averageTime * Double(timeframe.items.count) == sum)
+    }
+    
     // - MARK: Helpers
     
     private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> (ZZSegmentor, Timeframe) {

@@ -29,4 +29,8 @@ extension ZZSegmentor {
     public var start: Date { timeframe.start }
     public var end: Date { timeframe.end }
     public var totalTime: Double { timeframe.items.map(\.duration).reduce(0, +) }
+    public var averageTime: Double {
+        guard !timeframe.items.isEmpty else { return 0 }
+        return totalTime / Double(timeframe.items.count)
+    }
 }
