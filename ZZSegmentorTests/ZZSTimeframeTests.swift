@@ -134,6 +134,17 @@ final class ZZSTimeframeTests: XCTestCase {
         XCTAssert(afterUpdateTotalCount <= totalCount)
     }
     
+    func test_update_changeStartAndEnd() {
+        let sut = makeSUT()
+        let newStart = sut.items.last!.end.addingTimeInterval(-10)
+        let newEnd = newStart.addingTimeInterval(1.hours)
+
+        sut.update(start: newStart, end: newEnd)
+        
+        XCTAssertEqual(sut.start, newStart)
+        XCTAssertEqual(sut.end, newEnd)
+    }
+    
     // - MARK: Helpers
     
     private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> ZZSTimeframe {

@@ -27,6 +27,8 @@ final public class ZZSTimeframe: Timeframe {
     }
     
     public func update(start: Date, end: Date) {
+        (self.start, self.end) = (start, end)
+        
         var newItems: [DateItem] = []
         var startIndex = 0
         var endIndex = items.count - 1
