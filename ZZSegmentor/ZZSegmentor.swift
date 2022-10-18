@@ -23,6 +23,10 @@ public class ZZSegmentor {
     public convenience init(start: Date, end: Date) {
         self.init(items: [], start: start, end: end)
     }
+    
+    public func updateBounds(start: Date, end: Date) {
+        self.timeframe.update(start: start, end: end)
+    }
 }
 
 extension ZZSegmentor {

@@ -53,6 +53,17 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssertEqual(sut.averageTime * Double(timeframe.items.count), sum)
     }
     
+    func test_updateBounds_changeBoundsOfTimeframe() {
+        let (sut, timeframe) = makeSUT()
+        let newStart = Date().addingTimeInterval(-8.hours)
+        let newEnd = Date().addingTimeInterval(8.hours)
+        
+        sut.updateBounds(start: newStart, end: newEnd)
+        
+        XCTAssertEqual(sut.start, timeframe.start)
+        XCTAssertEqual(sut.end, timeframe.end)
+    }
+    
     // - MARK: Helpers
     
     private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> (ZZSegmentor, Timeframe) {
