@@ -50,7 +50,7 @@ final class ZZSegmentorTests: XCTestCase {
         let (sut, timeframe) = makeSUT()
         let sum = timeframe.items.map(\.duration).reduce(0, +)
                         
-        XCTAssert(sut.averageTime * Double(timeframe.items.count) == sum)
+        XCTAssertEqual(sut.averageTime * Double(timeframe.items.count), sum)
     }
     
     // - MARK: Helpers
