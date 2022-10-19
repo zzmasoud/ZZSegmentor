@@ -38,4 +38,5 @@ extension ZZSegmentor {
         guard !timeframe.items.isEmpty else { return 0 }
         return totalTime / Double(timeframe.items.count)
     }
+    public var itemsInTimeframe: [DateItem] { timeframe.items }
 }

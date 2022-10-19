@@ -64,6 +64,17 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssertEqual(sut.end, timeframe.end)
     }
     
+    func test_itemsInTimeframe_deliverItemsFromTimeframe() {
+        let (sut, timeframe) = makeSUT()
+        let timeframeItems = timeframe.items
+        
+        let items = sut.itemsInTimeframe
+        
+        XCTAssertEqual(items.count, timeframeItems.count)
+        XCTAssertEqual(items.first!.start, timeframeItems.first!.start)
+        XCTAssertEqual(items.last!.start, timeframeItems.last!.start)
+    }
+    
     // - MARK: Helpers
     
     private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> (ZZSegmentor, Timeframe) {
