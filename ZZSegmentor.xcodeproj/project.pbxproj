@@ -11,6 +11,7 @@
 		043E098928F2C21A00D0C8B8 /* ZZSItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E098828F2C21A00D0C8B8 /* ZZSItem.swift */; };
 		043E098B28F2C49700D0C8B8 /* ZZSegmentorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043E098A28F2C49700D0C8B8 /* ZZSegmentorTests.swift */; };
 		0454A02529006462007C4647 /* Int+TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454A02429006462007C4647 /* Int+TimeInterval.swift */; };
+		0454A02729017382007C4647 /* ZZSegmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454A02629017382007C4647 /* ZZSegmentTests.swift */; };
 		04AAAD3828D32AC900C57D89 /* ZZSegmentor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAAD2F28D32AC800C57D89 /* ZZSegmentor.framework */; };
 		04AAAD3D28D32AC900C57D89 /* ZZSTimeframeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAAD3C28D32AC900C57D89 /* ZZSTimeframeTests.swift */; };
 		04AAAD3E28D32AC900C57D89 /* ZZSegmentor.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AAAD3228D32AC800C57D89 /* ZZSegmentor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -33,6 +34,7 @@
 		043E098828F2C21A00D0C8B8 /* ZZSItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSItem.swift; sourceTree = "<group>"; };
 		043E098A28F2C49700D0C8B8 /* ZZSegmentorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSegmentorTests.swift; sourceTree = "<group>"; };
 		0454A02429006462007C4647 /* Int+TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+TimeInterval.swift"; sourceTree = "<group>"; };
+		0454A02629017382007C4647 /* ZZSegmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSegmentTests.swift; sourceTree = "<group>"; };
 		04AAAD2F28D32AC800C57D89 /* ZZSegmentor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZZSegmentor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AAAD3228D32AC800C57D89 /* ZZSegmentor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZSegmentor.h; sourceTree = "<group>"; };
 		04AAAD3728D32AC900C57D89 /* ZZSegmentorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZZSegmentorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,6 +105,7 @@
 				0454A0232900644F007C4647 /* Shared */,
 				04AAAD3C28D32AC900C57D89 /* ZZSTimeframeTests.swift */,
 				04CA8CF228D44EE2008BA7A5 /* ZZSItemTests.swift */,
+				0454A02629017382007C4647 /* ZZSegmentTests.swift */,
 				043E098A28F2C49700D0C8B8 /* ZZSegmentorTests.swift */,
 			);
 			path = ZZSegmentorTests;
@@ -231,6 +234,7 @@
 				043E098B28F2C49700D0C8B8 /* ZZSegmentorTests.swift in Sources */,
 				04CA8CF328D44EE2008BA7A5 /* ZZSItemTests.swift in Sources */,
 				04AAAD3D28D32AC900C57D89 /* ZZSTimeframeTests.swift in Sources */,
+				0454A02729017382007C4647 /* ZZSegmentTests.swift in Sources */,
 				0454A02529006462007C4647 /* Int+TimeInterval.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
