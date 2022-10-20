@@ -16,11 +16,14 @@ struct ZZSDateUnitShare {
     let date: Date
     let unit: DateUnit
     let duration: TimeInterval
-    
 }
 
 class ZZSegment {
+    var currentUnit: DateUnit
     
+    init(unit: DateUnit = .hourly) {
+        self.currentUnit = unit
+    }
 }
 
 final class ZZSegmentTests: XCTestCase {
