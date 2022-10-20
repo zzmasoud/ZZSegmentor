@@ -8,9 +8,13 @@
 import XCTest
 import ZZSegmentor
 
+enum DateUnit {
+    case hourly, daily, monthly
+}
+
 struct ZZSDateUnitShare {
     let date: Date
-    let unit: Int
+    let unit: DateUnit
     let duration: TimeInterval
     
 }
