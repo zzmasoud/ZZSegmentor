@@ -144,6 +144,21 @@ final class ZZSegmentTests: XCTestCase {
         XCTAssert(segments.last!.duration == 45.minutes)
         XCTAssert(segments.last!.date == end)
     }
+    
+    func test_getSegments_returnTwoDailySharesForItemsInPartialBounds() {
+        let start = Calendar.current.startOfDay(for: Date()).addingTimeInterval(21.hours)
+        let end = Calendar.current.startOfDay(for: Date()).addingTimeInterval(1.days).addingTimeInterval(12.hours)
+        let item: DateItem = ZZSItem(start: start, end: end)!
+        let sut = ZZSegment(unit: .daily)
+        
+        let segments = sut.getSegments(of: item)
+        
+        XCTAssert(segments.count == 2)
+        XCTAssert(segments.first!.duration == 3.hours)
+        XCTAssert(segments.first!.date == start)
+        XCTAssert(segments.last!.duration == 12.hours)
+        XCTAssert(segments.last!.date == end)
+    }
 }
 
 private extension Date {
