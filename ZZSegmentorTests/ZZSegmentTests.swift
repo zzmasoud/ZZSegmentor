@@ -118,7 +118,7 @@ final class ZZSegmentTests: XCTestCase {
     }
     
     func test_getSegments_returnSingleDailyShareForItemInLessThanOneMonth() {
-        let start = Calendar.current.startOfDay(for: Date())
+        let start = Calendar.current.startOfDay(for: Date()).startOfMonth
         let end = start.addingTimeInterval(21.days)
         let item: DateItem = ZZSItem(start: start, end: end)!
         let sut = ZZSegment(unit: .monthly)
@@ -150,5 +150,6 @@ private extension Date {
     var hour: Int { Calendar.current.component(.hour, from: self) }
     var day: Int { Calendar.current.component(.day, from: self) }
     var month: Int { Calendar.current.component(.month, from: self) }
+    var startOfMonth: Date { Calendar.current.date(bySetting: .day, value: 1, of: self)! }
 
 }
