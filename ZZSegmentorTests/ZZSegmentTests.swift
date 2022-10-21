@@ -56,9 +56,9 @@ class ZZSegment {
             }
             if let tailDate = dates.last {
                 let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: tailDate)!
-                let inside = DateInterval(start: dateInterval.start, end: tailDate)
+                let inside = DateInterval(start: dateInterval.start, end: item.end)
                 let intersection = dateInterval.intersection(with: inside)!
-                shares.append(ZZSDateUnitShare(date: tailDate, unit: currentUnit, duration: intersection.duration))
+                shares.append(ZZSDateUnitShare(date: item.end, unit: currentUnit, duration: intersection.duration))
             }
             return shares
         } else {
@@ -72,7 +72,7 @@ class ZZSegment {
         var tempDate = start
         while !cal.isDate(tempDate, equalTo:end, toGranularity: component), tempDate < end {
             tempDate = cal.date(byAdding: component, value: 1, to: tempDate)!
-            array.append( tempDate > end ? end:tempDate)
+            array.append(tempDate > end ? end:tempDate)
         }
         return array
     }
