@@ -36,9 +36,14 @@ class ZZSegment {
         self.currentUnit = unit
     }
     
-    func getSegment(of item: DateItem) -> [ZZSDateUnitShare] {
-        // it should first group the item units by the currentUnit
-        return []
+    func getSegments(of item: DateItem) -> [ZZSDateUnitShare] {
+        let dates = group(by: currentUnit, start: item.start, end: item.end)
+        let date = dates[0]
+        let dateInterval = cal.dateInterval(of: .hour, for: date)!
+        let share = item.duration * 100 / dateInterval.duration
+        return [
+            ZZSDateUnitShare(date: item.start, unit: currentUnit, duration: item.duration)
+        ]
     }
     
     func group(by unit: DateUnit, start: Date, end: Date) -> [Date] {
@@ -64,6 +69,19 @@ final class ZZSegmentTests: XCTestCase {
         
         XCTAssertEqual(dates.first!.hour, item.start.hour)
         XCTAssertEqual(dates.last!.hour, item.end.hour)
+    }
+    
+    func test_getSegments_returnsSingleHourlyShareForItemInLessThanOneHour() {
+        let start = Calendar.current.startOfDay(for: Date())
+        let end = start.addingTimeInterval(45.minutes)
+        let item: DateItem = ZZSItem(start: start, end: end)!
+        let sut = ZZSegment()
+        
+        let segments = sut.getSegments(of: item)
+        
+        XCTAssert(segments.count == 1)
+        XCTAssert(segments.first!.duration == 45.minutes)
+        XCTAssert(segments.first!.date == start)
     }
 }
 
