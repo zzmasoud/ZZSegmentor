@@ -38,12 +38,32 @@ class ZZSegment {
     
     func getSegments(of item: DateItem) -> [ZZSDateUnitShare] {
         let dates = group(by: currentUnit, start: item.start, end: item.end)
-        let date = dates[0]
-        let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: date)!
-        let share = item.duration * 100 / dateInterval.duration
-        return [
-            ZZSDateUnitShare(date: item.start, unit: currentUnit, duration: item.duration)
-        ]
+        
+        if dates.count == 1 {
+            let date = dates[0]
+            let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: date)!
+            let share = item.duration * 100 / dateInterval.duration
+            return [
+                ZZSDateUnitShare(date: item.start, unit: currentUnit, duration: item.duration)
+            ]
+        } else if dates.count == 2 {
+            var shares = [ZZSDateUnitShare]()
+            if let headDate = dates.first {
+                let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: headDate)!
+                let inside = DateInterval(start: headDate, end: dateInterval.end)
+                let intersection = dateInterval.intersection(with: inside)!
+                shares.append(ZZSDateUnitShare(date: headDate, unit: currentUnit, duration: intersection.duration))
+            }
+            if let tailDate = dates.last {
+                let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: tailDate)!
+                let inside = DateInterval(start: dateInterval.start, end: tailDate)
+                let intersection = dateInterval.intersection(with: inside)!
+                shares.append(ZZSDateUnitShare(date: tailDate, unit: currentUnit, duration: intersection.duration))
+            }
+            return shares
+        } else {
+            return []
+        }
     }
     
     func group(by unit: DateUnit, start: Date, end: Date) -> [Date] {
@@ -108,6 +128,21 @@ final class ZZSegmentTests: XCTestCase {
         XCTAssert(segments.count == 1)
         XCTAssert(segments.first!.duration == 21.days)
         XCTAssert(segments.first!.date == start)
+    }
+    
+    func test_getSegments_returnTwoHourlySharesForItemsInPartialBounds() {
+        let start = Calendar.current.startOfDay(for: Date()).addingTimeInterval(55.minutes)
+        let end = Calendar.current.startOfDay(for: Date()).addingTimeInterval(1.hours).addingTimeInterval(45.minutes)
+        let item: DateItem = ZZSItem(start: start, end: end)!
+        let sut = ZZSegment()
+        
+        let segments = sut.getSegments(of: item)
+        
+        XCTAssert(segments.count == 2)
+        XCTAssert(segments.first!.duration == 5.minutes)
+        XCTAssert(segments.first!.date == start)
+        XCTAssert(segments.last!.duration == 45.minutes)
+        XCTAssert(segments.last!.date == end)
     }
 }
 
