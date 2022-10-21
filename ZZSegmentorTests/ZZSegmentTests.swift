@@ -52,7 +52,7 @@ class ZZSegment {
         var tempDate = start
         while !cal.isDate(tempDate, equalTo:end, toGranularity: component), tempDate < end {
             tempDate = cal.date(byAdding: component, value: 1, to: tempDate)!
-            array.append(tempDate)
+            array.append( tempDate > end ? end:tempDate)
         }
         return array
     }
