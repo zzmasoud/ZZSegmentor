@@ -159,12 +159,31 @@ final class ZZSegmentTests: XCTestCase {
         XCTAssert(segments.last!.duration == 12.hours)
         XCTAssert(segments.last!.date == end)
     }
+    
+    func test_getSegments_returnTwoMonthlySharesForItemsInPartialBounds() {
+        let start = Date().startOfMonth.addingTimeInterval(5.days)
+        let end = start.endOfMonth.addingTimeInterval(1.days).addingTimeInterval(10.days)
+        
+        let timeIntervalFromStartToEndOfMonth = Calendar.current.dateInterval(of: .month, for: start)!.end.timeIntervalSince1970 - start.timeIntervalSince1970
+        
+        let item: DateItem = ZZSItem(start: start, end: end)!
+        let sut = ZZSegment(unit: .monthly)
+        
+        let segments = sut.getSegments(of: item)
+        
+        XCTAssert(segments.count == 2)
+        XCTAssert(segments.first!.duration == timeIntervalFromStartToEndOfMonth)
+        XCTAssert(segments.first!.date == start)
+        XCTAssert(segments.last!.duration == 10.days)
+        XCTAssert(segments.last!.date == end)
+    }
 }
 
 private extension Date {
     var hour: Int { Calendar.current.component(.hour, from: self) }
     var day: Int { Calendar.current.component(.day, from: self) }
     var month: Int { Calendar.current.component(.month, from: self) }
-    var startOfMonth: Date { Calendar.current.date(bySetting: .day, value: 1, of: self)! }
+    var startOfMonth: Date { Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: self))! }
+    var endOfMonth: Date { Calendar.current.date(byAdding: DateComponents(month: 1, day: -1), to: self.startOfMonth)! }
 
 }
