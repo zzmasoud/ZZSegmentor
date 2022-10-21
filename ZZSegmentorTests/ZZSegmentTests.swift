@@ -39,7 +39,7 @@ class ZZSegment {
     func getSegments(of item: DateItem) -> [ZZSDateUnitShare] {
         let dates = group(by: currentUnit, start: item.start, end: item.end)
         let date = dates[0]
-        let dateInterval = cal.dateInterval(of: .hour, for: date)!
+        let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: date)!
         let share = item.duration * 100 / dateInterval.duration
         return [
             ZZSDateUnitShare(date: item.start, unit: currentUnit, duration: item.duration)
@@ -81,6 +81,19 @@ final class ZZSegmentTests: XCTestCase {
         
         XCTAssert(segments.count == 1)
         XCTAssert(segments.first!.duration == 45.minutes)
+        XCTAssert(segments.first!.date == start)
+    }
+    
+    func test_getSegments_returnsSingleDailyShareForItemInLessThanOneDay() {
+        let start = Calendar.current.startOfDay(for: Date())
+        let end = start.addingTimeInterval(21.hours)
+        let item: DateItem = ZZSItem(start: start, end: end)!
+        let sut = ZZSegment(unit: .daily)
+        
+        let segments = sut.getSegments(of: item)
+        
+        XCTAssert(segments.count == 1)
+        XCTAssert(segments.first!.duration == 21.hours)
         XCTAssert(segments.first!.date == start)
     }
 }
