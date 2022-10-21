@@ -71,7 +71,7 @@ final class ZZSegmentTests: XCTestCase {
         XCTAssertEqual(dates.last!.hour, item.end.hour)
     }
     
-    func test_getSegments_returnsSingleHourlyShareForItemInLessThanOneHour() {
+    func test_getSegments_returnSingleHourlyShareForItemInLessThanOneHour() {
         let start = Calendar.current.startOfDay(for: Date())
         let end = start.addingTimeInterval(45.minutes)
         let item: DateItem = ZZSItem(start: start, end: end)!
@@ -84,7 +84,7 @@ final class ZZSegmentTests: XCTestCase {
         XCTAssert(segments.first!.date == start)
     }
     
-    func test_getSegments_returnsSingleDailyShareForItemInLessThanOneDay() {
+    func test_getSegments_returnSingleDailyShareForItemInLessThanOneDay() {
         let start = Calendar.current.startOfDay(for: Date())
         let end = start.addingTimeInterval(21.hours)
         let item: DateItem = ZZSItem(start: start, end: end)!
@@ -97,7 +97,7 @@ final class ZZSegmentTests: XCTestCase {
         XCTAssert(segments.first!.date == start)
     }
     
-    func test_getSegments_returnsSingleDailyShareForItemInLessThanOneMonth() {
+    func test_getSegments_returnSingleDailyShareForItemInLessThanOneMonth() {
         let start = Calendar.current.startOfDay(for: Date())
         let end = start.addingTimeInterval(21.days)
         let item: DateItem = ZZSItem(start: start, end: end)!
