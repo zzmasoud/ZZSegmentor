@@ -96,6 +96,19 @@ final class ZZSegmentTests: XCTestCase {
         XCTAssert(segments.first!.duration == 21.hours)
         XCTAssert(segments.first!.date == start)
     }
+    
+    func test_getSegments_returnsSingleDailyShareForItemInLessThanOneMonth() {
+        let start = Calendar.current.startOfDay(for: Date())
+        let end = start.addingTimeInterval(21.days)
+        let item: DateItem = ZZSItem(start: start, end: end)!
+        let sut = ZZSegment(unit: .monthly)
+        
+        let segments = sut.getSegments(of: item)
+        
+        XCTAssert(segments.count == 1)
+        XCTAssert(segments.first!.duration == 21.days)
+        XCTAssert(segments.first!.date == start)
+    }
 }
 
 private extension Date {
