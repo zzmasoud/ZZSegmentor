@@ -229,6 +229,23 @@ final class ZZSegmentTests: XCTestCase {
 //        XCTAssert(segments[7].duration == 12.hours)
         XCTAssert(segments[7].date == end)
     }
+    
+    func test_getSegments_returnMultipleMonthlySharesForItemsInPartialBounds() {
+        let start = Date().startOfMonth.addingTimeInterval(5.days)
+        let end = Date().startOfMonth.addingTimeInterval(90.days).addingTimeInterval(10.days)
+        
+        let timeIntervalFromStartToEndOfMonth = Calendar.current.dateInterval(of: .month, for: start)!.end.timeIntervalSince1970 - start.timeIntervalSince1970
+        
+        let item: DateItem = ZZSItem(start: start, end: end)!
+        let sut = ZZSegment(unit: .monthly)
+        
+        let segments = sut.getSegments(of: item)
+        
+        XCTAssert(segments.count == 4)
+        XCTAssert(segments.first!.duration == timeIntervalFromStartToEndOfMonth)
+        XCTAssert(segments.first!.date == start)
+        XCTAssert(segments.last!.date == end)
+    }
 }
 
 private extension Date {
