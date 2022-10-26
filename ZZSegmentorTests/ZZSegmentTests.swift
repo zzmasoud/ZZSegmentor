@@ -46,23 +46,28 @@ class ZZSegment {
             return [
                 ZZSDateUnitShare(date: item.start, unit: currentUnit, duration: item.duration)
             ]
-        } else if dates.count == 2 {
+        } else {
             var shares = [ZZSDateUnitShare]()
-            if let headDate = dates.first {
-                let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: headDate)!
-                let inside = DateInterval(start: headDate, end: dateInterval.end)
-                let intersection = dateInterval.intersection(with: inside)!
-                shares.append(ZZSDateUnitShare(date: headDate, unit: currentUnit, duration: intersection.duration))
-            }
-            if let tailDate = dates.last {
-                let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: tailDate)!
-                let inside = DateInterval(start: dateInterval.start, end: item.end)
-                let intersection = dateInterval.intersection(with: inside)!
-                shares.append(ZZSDateUnitShare(date: item.end, unit: currentUnit, duration: intersection.duration))
+            for (index, date) in dates.enumerated() {
+                if index == 0 {
+                    let headDate = date
+                    let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: headDate)!
+                    let inside = DateInterval(start: headDate, end: dateInterval.end)
+                    let intersection = dateInterval.intersection(with: inside)!
+                    shares.append(ZZSDateUnitShare(date: headDate, unit: currentUnit, duration: intersection.duration))
+                }
+                else if index == dates.count-1 {
+                    let tailDate = date
+                    let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: tailDate)!
+                    let inside = DateInterval(start: dateInterval.start, end: item.end)
+                    let intersection = dateInterval.intersection(with: inside)!
+                    shares.append(ZZSDateUnitShare(date: item.end, unit: currentUnit, duration: intersection.duration))
+                } else {
+                    let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: date)!
+                    shares.append(ZZSDateUnitShare(date: dateInterval.start, unit: currentUnit, duration: dateInterval.duration))
+                }
             }
             return shares
-        } else {
-            return []
         }
     }
     
@@ -176,6 +181,27 @@ final class ZZSegmentTests: XCTestCase {
         XCTAssert(segments.first!.date == start)
         XCTAssert(segments.last!.duration == 10.days)
         XCTAssert(segments.last!.date == end)
+    }
+    
+    func test_getSegments_returnMultipleHourlySharesForItemsInPartialBounds() {
+        let start = Calendar.current.startOfDay(for: Date()).addingTimeInterval(55.minutes)
+        let end = Calendar.current.startOfDay(for: Date()).addingTimeInterval(7.hours).addingTimeInterval(45.minutes)
+        let item: DateItem = ZZSItem(start: start, end: end)!
+        let sut = ZZSegment()
+        
+        let segments = sut.getSegments(of: item)
+        
+        XCTAssert(segments.count == 8)
+        XCTAssert(segments[0].duration == 5.minutes)
+        XCTAssert(segments[0].date == start)
+        XCTAssert(segments[1].duration == 1.hours)
+        XCTAssert(segments[2].duration == 1.hours)
+        XCTAssert(segments[3].duration == 1.hours)
+        XCTAssert(segments[4].duration == 1.hours)
+        XCTAssert(segments[5].duration == 1.hours)
+        XCTAssert(segments[6].duration == 1.hours)
+        XCTAssert(segments[7].duration == 45.minutes)
+        XCTAssert(segments[7].date == end)
     }
 }
 
