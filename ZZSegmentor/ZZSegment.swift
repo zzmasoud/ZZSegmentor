@@ -73,7 +73,7 @@ public class ZZSegment {
         }
     }
     
-    private func group(by unit: DateUnit, start: Date, end: Date) -> [Date] {
+    func group(by unit: DateUnit, start: Date, end: Date) -> [Date] {
         let component = unit.toCalendarComponent
         var array: [Date] = [start]
         var tempDate = start

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import ZZSegmentor
+@testable import ZZSegmentor
 
 final class ZZSegmentTests: XCTestCase {
     func test_groupBy_returnGroupedDatesForAnItem() {
@@ -142,9 +142,9 @@ final class ZZSegmentTests: XCTestCase {
         XCTAssert(segments[0].date == start)
         XCTAssert(segments[1].duration == 1.days)
         XCTAssert(segments[2].duration == 1.days)
-        XCTAssert(segments[3].duration == 1.days)
         // this is failing because of daylight saving on last sunday of october which is excatly this day! 30 OCT 2022
-//        XCTAssert(segments[4].duration == 1.days)
+//        XCTAssert(segments[3].duration == 1.days)
+        XCTAssert(segments[4].duration == 1.days)
         XCTAssert(segments[5].duration == 1.days)
         XCTAssert(segments[6].duration == 1.days)
         // there is the same issue, it return 12 - 1 hours
