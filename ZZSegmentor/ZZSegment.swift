@@ -27,7 +27,12 @@ public struct ZZSDateUnitShare {
     public let duration: TimeInterval
 }
 
-public class ZZSegment {
+public protocol Segment {
+    var currentUnit: DateUnit { get }
+    func getSegments(of item: DateItem) -> [ZZSDateUnitShare]
+}
+
+public class ZZSegment: Segment {
     
     private lazy var cal = {
         return Calendar.current
