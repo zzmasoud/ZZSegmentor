@@ -8,17 +8,20 @@
 import Foundation
 
 public class ZZSegmentor {
+    private let segment: Segment
     private let timeframe: Timeframe
     private var items: [DateItem]
     
     public init(items: [DateItem], start: Date, end: Date) {
         self.timeframe = ZZSTimeframe(items: items, start: start, end: end)
+        self.segment = ZZSegment()
         self.items = items
     }
     
-    public init(timeframe: Timeframe) {
+    public init(timeframe: Timeframe, segment: ZZSegment = .init()) {
         self.timeframe = timeframe
         self.items = timeframe.items
+        self.segment = segment
     }
     
     public convenience init(start: Date, end: Date) {
