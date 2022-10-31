@@ -13,6 +13,7 @@
 		0454A02529006462007C4647 /* Int+TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454A02429006462007C4647 /* Int+TimeInterval.swift */; };
 		0454A02729017382007C4647 /* ZZSegmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454A02629017382007C4647 /* ZZSegmentTests.swift */; };
 		0454A029290A5C38007C4647 /* ZZSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454A028290A5C38007C4647 /* ZZSegment.swift */; };
+		04A4178C290FF79400CD85D3 /* Date+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4178B290FF79400CD85D3 /* Date+String.swift */; };
 		04AAAD3828D32AC900C57D89 /* ZZSegmentor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04AAAD2F28D32AC800C57D89 /* ZZSegmentor.framework */; };
 		04AAAD3D28D32AC900C57D89 /* ZZSTimeframeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAAD3C28D32AC900C57D89 /* ZZSTimeframeTests.swift */; };
 		04AAAD3E28D32AC900C57D89 /* ZZSegmentor.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AAAD3228D32AC800C57D89 /* ZZSegmentor.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -37,6 +38,7 @@
 		0454A02429006462007C4647 /* Int+TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+TimeInterval.swift"; sourceTree = "<group>"; };
 		0454A02629017382007C4647 /* ZZSegmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSegmentTests.swift; sourceTree = "<group>"; };
 		0454A028290A5C38007C4647 /* ZZSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZZSegment.swift; sourceTree = "<group>"; };
+		04A4178B290FF79400CD85D3 /* Date+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+String.swift"; sourceTree = "<group>"; };
 		04AAAD2F28D32AC800C57D89 /* ZZSegmentor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ZZSegmentor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04AAAD3228D32AC800C57D89 /* ZZSegmentor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZZSegmentor.h; sourceTree = "<group>"; };
 		04AAAD3728D32AC900C57D89 /* ZZSegmentorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZZSegmentorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				0454A02429006462007C4647 /* Int+TimeInterval.swift */,
+				04A4178B290FF79400CD85D3 /* Date+String.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 			files = (
 				043E098B28F2C49700D0C8B8 /* ZZSegmentorTests.swift in Sources */,
 				04CA8CF328D44EE2008BA7A5 /* ZZSItemTests.swift in Sources */,
+				04A4178C290FF79400CD85D3 /* Date+String.swift in Sources */,
 				04AAAD3D28D32AC900C57D89 /* ZZSTimeframeTests.swift in Sources */,
 				0454A02729017382007C4647 /* ZZSegmentTests.swift in Sources */,
 				0454A02529006462007C4647 /* Int+TimeInterval.swift in Sources */,
