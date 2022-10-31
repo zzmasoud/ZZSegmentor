@@ -75,6 +75,20 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssertEqual(items.last!.start, timeframeItems.last!.start)
     }
     
+    func test_getSegments_delivers() {
+        let items: [DateItem] = [
+            ZZSItem(start: Date("2022-10-31 17:00"), end: Date("2022-10-31 17:10"))!,
+            ZZSItem(start: Date("2022-10-31 17:20"), end: Date("2022-10-31 17:40"))!,
+            ZZSItem(start: Date("2022-10-31 17:45"), end: Date("2022-10-31 17:59"))!,
+        ]
+        let sut = ZZSegmentor(items: items, start: Date("2022-10-31 17:00"), end: Date("2022-10-31 18:00"))
+        
+        let segments = sut.getSegments()
+        
+        XCTAssert(segments.count == 1)
+        XCTAssertEqual(segments[0].value, items.map(\.duration).reduce(0, +))
+    }
+    
     // - MARK: Helpers
     
     private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> (ZZSegmentor, Timeframe) {

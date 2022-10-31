@@ -8,6 +8,11 @@
 import Foundation
 
 public class ZZSegmentor {
+    private struct Share: DateUnitShare {
+        var key: Int
+        var value: TimeInterval
+    }
+    
     private let segment: Segment
     private let timeframe: Timeframe
     private var items: [DateItem]
@@ -30,6 +35,17 @@ public class ZZSegmentor {
     
     public func updateBounds(start: Date, end: Date) {
         self.timeframe.update(start: start, end: end)
+    }
+    
+    public func getSegments() -> [DateUnitShare] {
+        var dic: [Int: TimeInterval] = [:]
+        itemsInTimeframe.forEach { item in
+            let segments = segment.getSegments(of: item)
+            segments.forEach { segment in
+                dic[segment.key] = (dic[segment.key] ?? 0) + segment.value
+            }
+        }
+        return dic.map({ Share(key: $0.key, value: $0.value) })
     }
 }
 
