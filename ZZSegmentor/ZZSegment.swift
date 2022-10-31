@@ -36,7 +36,7 @@ public struct ZZSDateUnitShare: DateUnitShare {
 
 public protocol Segment {
     var currentUnit: DateUnit { get }
-    func getSegments(of item: DateItem) -> [ZZSDateUnitShare]
+    func getSegments(of item: DateItem) -> [DateUnitShare]
 }
 
 public class ZZSegment: Segment {
@@ -51,7 +51,7 @@ public class ZZSegment: Segment {
         self.currentUnit = unit
     }
     
-    public func getSegments(of item: DateItem) -> [ZZSDateUnitShare] {
+    public func getSegments(of item: DateItem) -> [DateUnitShare] {
         let dates = group(by: currentUnit, start: item.start, end: item.end)
         
         if dates.count == 1 {
