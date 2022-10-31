@@ -21,10 +21,17 @@ public enum DateUnit {
     }
 }
 
-public struct ZZSDateUnitShare {
+public protocol DateUnitShare {
+    var key: Int { get }
+    var value: TimeInterval { get }
+}
+
+public struct ZZSDateUnitShare: DateUnitShare {
     public let date: Date
     public let unit: DateUnit
     public let duration: TimeInterval
+    public var value: TimeInterval { return self.duration }
+    public var key: Int { return Calendar.current.component(unit.toCalendarComponent, from: date) }
 }
 
 public protocol Segment {
