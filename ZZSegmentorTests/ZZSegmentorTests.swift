@@ -89,6 +89,21 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssertEqual(segments[0].value, items.map(\.duration).reduce(0, +))
     }
     
+    func test_getSegments_deliverSingleDailyShareForItemsInLessThanOneDayBounds() {
+        let items: [DateItem] = [
+            ZZSItem(start: Date("2022-10-31 10:00"), end: Date("2022-10-31 14:10"))!,
+            ZZSItem(start: Date("2022-10-31 19:20"), end: Date("2022-10-31 21:40"))!,
+            ZZSItem(start: Date("2022-10-31 22:45"), end: Date("2022-10-31 23:59"))!,
+        ]
+        let sut = makeSUT(items: items, segmentUnit: .daily)
+        
+        let segments = sut.getSegments()
+        
+        XCTAssert(segments.count == 1)
+        XCTAssertEqual(segments[0].key, 31)
+        XCTAssertEqual(segments[0].value, items.map(\.duration).reduce(0, +))
+    }
+    
     // - MARK: Helpers
     
     private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> (ZZSegmentor, Timeframe) {
