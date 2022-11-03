@@ -115,6 +115,29 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssertEqual(segments[0].value, items.map(\.duration).reduce(0, +))
     }
     
+    func test_getSegmentsWithAllUnits_deliverAllHourlySharesForItems() {
+        let items: [DateItem] = [
+            ZZSItem(start: Date("2022-10-31 10:00"), end: Date("2022-10-31 14:10"))!,
+            ZZSItem(start: Date("2022-10-31 19:20"), end: Date("2022-10-31 21:40"))!,
+            ZZSItem(start: Date("2022-10-31 22:45"), end: Date("2022-10-31 23:59"))!,
+        ]
+        let sut = makeSUT(items: items, segmentUnit: .hourly)
+        
+        let segments = sut.getSegments(allUnits: true)
+
+        XCTAssert(segments.count == 24)
+        XCTAssert(segments.first(where: {$0.key == 0})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 4})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 8})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 10})!.value != 0)
+        XCTAssert(segments.first(where: {$0.key == 14})!.value != 0)
+        XCTAssert(segments.first(where: {$0.key == 16})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 18})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 20})!.value != 0)
+        XCTAssert(segments.first(where: {$0.key == 22})!.value != 0)
+        XCTAssert(segments.first(where: {$0.key == 23})!.value != 0)
+    }
+    
     // - MARK: Helpers
     
     private func makeSUT(_ numberOfItems: Int = 10, start: Date = Date().addingTimeInterval(-2.days), end: Date = Date().addingTimeInterval(2.days)) -> (ZZSegmentor, Timeframe) {
