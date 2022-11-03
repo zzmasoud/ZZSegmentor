@@ -37,12 +37,19 @@ public class ZZSegmentor {
         self.timeframe.update(start: start, end: end)
     }
     
-    public func getSegments() -> [DateUnitShare] {
+    public func getSegments(allUnits: Bool = false) -> [DateUnitShare] {
         var dic: [Int: TimeInterval] = [:]
         itemsInTimeframe.forEach { item in
             let segments = segment.getSegments(of: item)
             segments.forEach { segment in
                 dic[segment.key] = (dic[segment.key] ?? 0) + segment.value
+            }
+        }
+        
+        if allUnits {
+            let range = segment.currentUnit.range
+            range.forEach { unit in
+                dic[unit] = dic[unit] ?? 0
             }
         }
         return dic.map({ Share(key: $0.key, value: $0.value) })

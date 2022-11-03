@@ -19,6 +19,17 @@ public enum DateUnit {
             return .month
         }
     }
+    
+    var range: Range<Int> {
+        switch self {
+        case .hourly:
+            return 0..<24
+        case .daily:
+            return 1..<31
+        case .monthly:
+            return 1..<13
+        }
+    }
 }
 
 public protocol DateUnitShare {
