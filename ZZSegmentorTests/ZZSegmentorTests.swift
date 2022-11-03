@@ -115,7 +115,7 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssertEqual(segments[0].value, items.map(\.duration).reduce(0, +))
     }
     
-    func test_getSegmentsWithAllUnits_deliverAllHourlySharesForItems() {
+    func test_getSegmentWithAllUnits_deliverAllHourlySharesForItems() {
         let items: [DateItem] = [
             ZZSItem(start: Date("2022-10-31 10:00"), end: Date("2022-10-31 14:10"))!,
             ZZSItem(start: Date("2022-10-31 19:20"), end: Date("2022-10-31 21:40"))!,
@@ -136,6 +136,31 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssert(segments.first(where: {$0.key == 20})!.value != 0)
         XCTAssert(segments.first(where: {$0.key == 22})!.value != 0)
         XCTAssert(segments.first(where: {$0.key == 23})!.value != 0)
+    }
+    
+    func test_getSegmentWithAllUnits_deliverAllDailySharesForItems() {
+        let items: [DateItem] = [
+            ZZSItem(start: Date("2022-11-2 10:00"), end: Date("2022-11-2 14:10"))!,
+            ZZSItem(start: Date("2022-11-8 19:20"), end: Date("2022-11-8 21:40"))!,
+            ZZSItem(start: Date("2022-11-12 22:45"), end: Date("2022-11-12 23:59"))!,
+        ]
+        let sut = makeSUT(items: items, segmentUnit: .daily)
+        
+        let segments = sut.getSegments(allUnits: true)
+
+        XCTAssert(segments.count == 30)
+        XCTAssert(segments.first(where: {$0.key == 1})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 2})!.value != 0)
+        XCTAssert(segments.first(where: {$0.key == 5})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 8})!.value != 0)
+        XCTAssert(segments.first(where: {$0.key == 10})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 12})!.value != 0)
+        XCTAssert(segments.first(where: {$0.key == 13})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 18})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 20})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 25})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 28})!.value == 0)
+        XCTAssert(segments.first(where: {$0.key == 30})!.value == 0)
     }
     
     // - MARK: Helpers
