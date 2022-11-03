@@ -31,6 +31,17 @@ final class ZZSegmentorTests: XCTestCase {
         XCTAssert(sut.end == end)
     }
     
+    func test_initByDates_deliversEmptyItems() {
+        let start = Date().addingTimeInterval(-1)
+        let end = Date().addingTimeInterval(1)
+        
+        let sut = ZZSegmentor(start: start, end: end)
+        
+        XCTAssert(sut.itemsInTimeframe.isEmpty)
+        XCTAssert(sut.start == start)
+        XCTAssert(sut.end == end)
+    }
+    
     func test_totalTime_deliversSumOfDurationsInTheTimeframe() {
         let (sut, timeframe) = makeSUT()
         
