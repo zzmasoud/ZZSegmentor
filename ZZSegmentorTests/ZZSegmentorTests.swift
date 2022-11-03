@@ -51,8 +51,7 @@ final class ZZSegmentorTests: XCTestCase {
     }
     
     func test_averageTime_deliversZeroForNoItems() {
-        let (sut, timeframe) = makeSUT(0)
-        let sum = timeframe.items.map(\.duration).reduce(0, +)
+        let (sut, _) = makeSUT(0)
             
         XCTAssert(sut.averageTime == 0)
     }

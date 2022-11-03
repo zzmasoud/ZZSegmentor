@@ -65,9 +65,6 @@ public class ZZSegment: Segment {
         let dates = group(by: currentUnit, start: item.start, end: item.end)
         
         if dates.count == 1 {
-            let date = dates[0]
-            let dateInterval = cal.dateInterval(of: currentUnit.toCalendarComponent, for: date)!
-            let share = item.duration * 100 / dateInterval.duration
             return [
                 ZZSDateUnitShare(date: item.start, unit: currentUnit, duration: item.duration)
             ]
