@@ -16,13 +16,22 @@ final class ZZSItemTests: XCTestCase {
         XCTAssertNil(sut)
     }
     
-    func test_duration_returnsTimeIntervalBetweenStartAndEnd() {
-        guard let sut = ZZSItem(start: Date(), end: Date().addingTimeInterval(12345)) else { return }
+    func test_duration_returnsTimeIntervalBetweenStartAndEnd() throws {
+        guard let sut = ZZSItem(start: Date(), end: Date().addingTimeInterval(12345)) else { throw NSError() }
         let diff: TimeInterval = sut.end.timeIntervalSince1970 - sut.start.timeIntervalSince1970
         
         let duration = sut.duration
         
         XCTAssertEqual(duration, diff)
+    }
+    
+    func test_description_deliversEnoughData() throws {
+        guard let sut = ZZSItem(start: Date(), end: Date().addingTimeInterval(12345)) else { throw NSError() }
+        
+        let description = sut.description
+        
+        XCTAssert(description.contains(sut.start.description))
+        XCTAssert(description.contains(sut.end.description))
     }
     
 }
