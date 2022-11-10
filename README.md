@@ -32,4 +32,25 @@ let start = end.startOfDay()
 let filteredItems = items.filter(\.start >=  start && \.end <= end)
 let totalTime: TimeInterval = filteredItems.map(\.duration).reduce(0, +)
 ```
-But this is not 100% accurate. because of edges the above code will remove some items. 
+But this is not 100% accurate. Let me explain it with this timeline:
+![Timeline](/DOCS/Timeline.png)
+
+The above code will reomve first and last item because of the filter code and also we can't forget about filtering items.
+To solve this problem `ZZSegmentor` first finds **edges** and then it just cosiders intersections if needed.
+
+``` swift
+import ZZSegmentor
+
+let items: [DateItem] = [...]
+
+// items between startOfDay .... now
+let end = Date()
+let start = end.startOfDay()
+
+let segmentor = ZZSegmentor(items: items, start: start, end: end)
+let totalTime = segmentor.totalTime
+let accurateItemsInTheBounds = segmentor.itemsInTimeframe
+```
+To demonstrate what just happened using `ZZSegmentor`:
+
+![Timeline](/DOCS/Edges.png)
