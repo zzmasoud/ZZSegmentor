@@ -33,6 +33,7 @@ let filteredItems = items.filter(\.start >=  start && \.end <= end)
 let totalTime: TimeInterval = filteredItems.map(\.duration).reduce(0, +)
 ```
 But this is not 100% accurate. Let me explain it with this timeline:
+
 ![Timeline](/DOCS/Timeline.png)
 
 The above code will reomve first and last item because of the filter code and also we can't forget about filtering items.
@@ -53,4 +54,35 @@ let accurateItemsInTheBounds = segmentor.itemsInTimeframe
 ```
 To demonstrate what just happened using `ZZSegmentor`:
 
-![Timeline](/DOCS/Edges.png)
+![Edges](/DOCS/Edges.png)
+
+### Segments
+There is a special bar chart on the statics page of my app which shows total time for a specific unit, e.g. total time spent daily in October. Apple has been provided `DateInterval` that works perfect with intervals and intersections. But loop through intervals based on units is not as easy as using it itself. `ZZSegmentor` makes it easy to do.
+
+Consider we have some datas for only 1 to 3 October and the module wants to segment them day by day. Again, we have edges and also looping through the desired unit. (in this image the iterator is on 2 OCT)
+
+![Segments](/DOCS/Segments.png)
+
+``` swift
+import ZZSegmentor
+
+let items: [DateItem] = [...]
+
+// items between startOfDay .... now
+let end = Date()
+let start = end.startOfDay()
+
+let segmentor = ZZSegmentor(items: items, start: start, end: end)
+segmentor.update(unit: .daily)
+let segmentes = segmentor.getSegments()
+/*
+ it prints [
+DateUnitShare(key: 1, value: totalTimeOf1OCT)
+DateUnitShare(key: 2, value: totalTimeOf2OCT)
+DateUnitShare(key: 3, value: totalTimeOf3OCT)
+]
+*/
+```
+This method ***getSegments()*** also accepts a `Boolean` parameter called `allUnits` which will add all shares even if it is not in the desired bounds, so for the above code it will print out the first tree `DateUnitShare` and the rest of share items with value 0 to the end of month.
+
+
