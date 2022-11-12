@@ -85,4 +85,5 @@ DateUnitShare(key: 3, value: totalTimeOf3OCT)
 ```
 This method ***getSegments()*** also accepts a `Boolean` parameter called `allUnits` which will add all shares even if it is not in the desired bounds, so for the above code it will print out the first tree `DateUnitShare` and the rest of share items with value 0 to the end of month.
 
-
+## License
+ZZSegmentor is available under the MIT license. See the LICENSE file for more info.
