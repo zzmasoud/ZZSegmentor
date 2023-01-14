@@ -1,8 +1,5 @@
 //
-//  ZZSegment.swift
-//  ZZSegmentor
-//
-//  Created by Masoud Sheikh Hosseini on 10/27/22.
+//  Copyright © zzmasoud (github.com/zzmasoud).
 //
 
 import Foundation

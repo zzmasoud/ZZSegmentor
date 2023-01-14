@@ -1,8 +1,5 @@
 //
-//  ZZSTimeframe.swift
-//  ZZSegmentor
-//
-//  Created by Masoud Sheikh Hosseini on 10/9/22.
+//  Copyright © zzmasoud (github.com/zzmasoud).
 //
 
 import Foundation

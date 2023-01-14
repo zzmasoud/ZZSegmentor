@@ -1,8 +1,5 @@
 //
-//  Date+String.swift
-//  ZZSegmentorTests
-//
-//  Created by Masoud Sheikh Hosseini on 10/31/22.
+//  Copyright © zzmasoud (github.com/zzmasoud).
 //
 
 import Foundation

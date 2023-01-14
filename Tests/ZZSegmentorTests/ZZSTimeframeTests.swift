@@ -1,8 +1,5 @@
 //
-//  ZZSTimeframeTests.swift
-//  ZZSegmentorTests
-//
-//  Created by Masoud Sheikh Hosseini on 9/15/22.
+//  Copyright © zzmasoud (github.com/zzmasoud).
 //
 
 import XCTest

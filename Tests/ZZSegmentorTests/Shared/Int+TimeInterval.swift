@@ -1,8 +1,5 @@
 //
-//  Int+TimeInterval.swift
-//  ZZSegmentorTests
-//
-//  Created by Masoud Sheikh Hosseini on 10/19/22.
+//  Copyright © zzmasoud (github.com/zzmasoud).
 //
 
 import Foundation
