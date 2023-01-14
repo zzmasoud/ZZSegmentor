@@ -10,8 +10,8 @@ public class ZZSegmentor {
         var value: TimeInterval
     }
     
-    private let segment: Segment
     private let timeframe: Timeframe
+    private let segment: Segment
     private var items: [DateItem]
     
     public init(items: [DateItem], start: Date, end: Date) {

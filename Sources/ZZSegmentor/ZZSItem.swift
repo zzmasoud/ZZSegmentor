@@ -14,17 +14,16 @@ public protocol DateItem {
 
 final public class ZZSItem: DateItem {
     public private(set) var start: Date
-    
     public private(set) var end: Date
-    
-    public var duration: TimeInterval {
-        return end.timeIntervalSince(start)
-    }
     
     required public init?(start: Date, end: Date) {
         guard start < end else { return nil }
         self.start = start
         self.end = end
+    }
+    
+    public var duration: TimeInterval {
+        return end.timeIntervalSince(start)
     }
 }
 

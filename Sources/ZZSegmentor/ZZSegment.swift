@@ -38,8 +38,8 @@ public struct ZZSDateUnitShare: DateUnitShare {
     public let date: Date
     public let unit: DateUnit
     public let duration: TimeInterval
-    public var value: TimeInterval { return self.duration }
-    public var key: Int { return Calendar.current.component(unit.toCalendarComponent, from: date) }
+    public var value: TimeInterval { self.duration }
+    public var key: Int { Calendar.current.component(unit.toCalendarComponent, from: date) }
 }
 
 public protocol Segment {
@@ -48,15 +48,15 @@ public protocol Segment {
 }
 
 public class ZZSegment: Segment {
-    private lazy var cal = {
-        return Calendar.current
-    }()
-    
     private(set) public var currentUnit: DateUnit
     
     public init(unit: DateUnit = .hourly) {
         self.currentUnit = unit
     }
+    
+    private lazy var cal = {
+        return Calendar.current
+    }()
     
     public func getSegments(of item: DateItem) -> [ZZSDateUnitShare] {
         let dates = group(by: currentUnit, start: item.start, end: item.end)

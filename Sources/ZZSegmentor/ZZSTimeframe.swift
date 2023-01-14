@@ -8,14 +8,13 @@ public protocol Timeframe {
     var start: Date { get }
     var end: Date { get }
     var items: [DateItem] { get }
-    init(items: [DateItem], start: Date, end: Date)
     func update(start: Date, end: Date)
 }
 
 final public class ZZSTimeframe: Timeframe {
+    public private(set) var items: [DateItem]
     public private(set) var start: Date
     public private(set) var end: Date
-    public private(set) var items: [DateItem]
 
     required public init(items: [DateItem], start: Date, end: Date) {
         self.items = items.sorted(by: {$0.start < $1.start})
